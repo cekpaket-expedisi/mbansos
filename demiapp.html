@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bansos Digital Sulteng</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f2f2f2;
+}
+
+.screen{
+display:none;
+min-height:100vh;
+padding-bottom:90px;
+}
+
+/* HEADER */
+
+.header{
+background:linear-gradient(180deg,#1e63b5,#0d47a1);
+color:white;
+padding:20px;
+border-bottom-left-radius:25px;
+border-bottom-right-radius:25px;
+}
+
+.saldo{
+margin-top:15px;
+background:rgba(255,255,255,0.15);
+padding:15px;
+border-radius:12px;
+}
+
+/* GRID */
+
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+padding:15px;
+text-align:center;
+}
+
+.menu-grid div{
+background:white;
+padding:12px 5px;
+border-radius:12px;
+font-size:22px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+cursor:pointer;
+}
+
+.menu-grid span{
+display:block;
+font-size:12px;
+margin-top:5px;
+}
+
+/* SLIDER */
+
+.slider{
+overflow:hidden;
+margin:10px;
+border-radius:12px;
+}
+
+.slides{
+display:flex;
+animation:slide 9s infinite;
+}
+
+.slides img{
+width:100%;
+flex-shrink:0;
+}
+
+@keyframes slide{
+0%{transform:translateX(0)}
+33%{transform:translateX(-100%)}
+66%{transform:translateX(-200%)}
+100%{transform:translateX(0)}
+}
+
+/* TRANSFER */
+
+input{
+width:90%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+background:#1565c0;
+color:white;
+}
+
+/* NAV */
+
+.nav{
+position:fixed;
+bottom:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:10px 0;
+box-shadow:0 -2px 5px rgba(0,0,0,0.1);
+}
+
+.nav div{
+text-align:center;
+font-size:22px;
+cursor:pointer;
+}
+
+.nav span{
+display:block;
+font-size:12px;
+}
+
+.msg{
+margin-top:10px;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HOME -->
+
+<div id="home" class="screen">
+
+<div class="header">
+
+Hai, LEOPOLD FRANS PARENGKUAN
+
+<div class="saldo">
+
+<small>Saldo Bansos</small>
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+
+<h2 id="saldoText">Rp 2.500.000</h2>
+
+<span onclick="toggleSaldo()" id="eyeBtn" style="font-size:22px;cursor:pointer;">
+👁️
+</span>
+
+</div>
+</div>
+</div>
+
+<div class="menu-grid">
+
+<div onclick="show('transfer')">💸<span>Transfer</span></div>
+<div onclick="demo()">🛒<span>Pembelian</span></div>
+<div onclick="demo()">💳<span>Pembayaran</span></div>
+<div onclick="demo()">👛<span>eWallet</span></div>
+
+<div onclick="demo()">🪙<span>Emas</span></div>
+<div onclick="demo()">📱<span>Cardless</span></div>
+<div onclick="show('virtual')">🔵<span>Virtual</span></div>
+<div onclick="show('akun')">👤<span>Akun</span></div>
+
+</div>
+
+<div class="slider">
+<div class="slides">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkkaiVuwp39P0Jd0VGptOG9ZsJRfYfMIn25U66W8h8yVBApSvLL0xHkL-w&s=10">
+<img src="https://desapandakgede.id/wp-content/uploads/2026/02/Cara-Buat-Akun-Cek-Bansos-Terbaru-2026-Lewat-HP-Dijamin-Berhasil.jpg">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsPunROHjeod4fT3uIsc4xweJtF4fetbVD_0rHRhCFgYn0ERw1RtbY8g4&s=10">
+</div>
+</div>
+
+</div>
+
+<!-- TRANSFER -->
+
+<div id="transfer" class="screen">
+
+<div class="header">Transfer Bansos</div>
+
+<div style="padding:15px;">
+
+<input id="bank" type="teks" placeholder="Nama Bank">
+<input id="nama" type="tel" placeholder="Nomor Rekening">
+<input id="jumlah" type="tel" placeholder="Jumlah transfer">
+
+<button onclick="kirim()">Kirim Transfer</button>
+
+<div id="msg" class="msg"></div>
+
+</div>
+</div>
+
+
+
+</div>
+
+<!-- AKUN -->
+
+<div id="akun" class="screen">
+
+<div class="header">Akun Penerima Bansos</div>
+
+<div style="padding:15px;">
+👤 Nama    : Penerima Bansos<br><br>
+📞 Nomor   : 08XXXXXXXX<br><br>
+🏦 Nasabah : Bank Sulteng<br><br>
+📍 Alamat  : Sulawesi Tengah</div>
+
+</div>
+
+<!-- NAV -->
+
+<div class="nav">
+
+<div onclick="show('home')">🏠<span>Home</span></div>
+<div onclick="show('transfer')">💸<span>Transfer</span></div>
+<div onclick="show('akun')">👤<span>Akun</span></div>
+
+</div>
+
+<script>
+
+/* SCREEN NAV */
+
+function show(menu){
+
+document.querySelectorAll(".screen").forEach(s=>s.style.display="none");
+document.getElementById(menu).style.display="block";
+
+}
+
+show("home");
+
+/* SALDO TOGGLE */
+
+let visible=true;
+
+function toggleSaldo(){
+
+let saldo=document.getElementById("saldoText");
+let eye=document.getElementById("eyeBtn");
+
+if(visible){
+saldo.innerText="******";
+eye.innerText="👁️‍🗨️";
+}else{
+saldo.innerText="Rp 1.200.000";
+eye.innerText="👁️";
+}
+
+visible=!visible;
+
+}
+
+/* TRANSFER DEMO */
+
+function kirim(){
+
+let nama=document.getElementById("nama").value;
+let jumlah=document.getElementById("jumlah").value;
+let msg=document.getElementById("msg");
+
+if(!nama || !jumlah){
+msg.innerHTML="❌ Lengkapi data";
+msg.style.color="red";
+return;
+}
+
+msg.innerHTML=" Transfer Gagal pastikan anda sudah mendaftar rekening bank Sulteng";
+msg.style.color="red";
+
+}
+
+function demo(){
+alert("Fitur ini tidak tersedia untuk saat ini");
+}
+
+</script>
+
+</body>
+</html>
